@@ -34,10 +34,33 @@ public class WordCounterMapper
      * Iterates array of tokens and emit each {token, 1}
      */
     for (String token : tokens) {
-      keyText.set(token);
+      /***
+       * Clean useless token chars
+       */
+      String tokenCleant = cleanToken(token);
+      
+      keyText.set(tokenCleant);
       valueInt.set(1);
 
       context.write(keyText, valueInt);
     }
+  }
+  
+  private String cleanToken(String token){
+    String tokenCleant = token;
+
+    tokenCleant = tokenCleant.replaceAll("\\s+", "");
+    tokenCleant = tokenCleant.replace(".", "");
+    tokenCleant = tokenCleant.replace(",", "");
+    tokenCleant = tokenCleant.replace(";", "");
+    tokenCleant = tokenCleant.replace(":", "");
+    tokenCleant = tokenCleant.replace("-", "");
+    tokenCleant = tokenCleant.replace("_", "");
+    tokenCleant = tokenCleant.replace("¿", "");
+    tokenCleant = tokenCleant.replace("?", "");
+    tokenCleant = tokenCleant.replace("¡", "");
+    tokenCleant = tokenCleant.replace("!", "");
+
+    return tokenCleant;
   }
 }
