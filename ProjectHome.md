@@ -1,0 +1,1 @@
+Source code of examples shown at the "MapReduce & Hadoop" conference. SeedRocket, Barcelona, June 2011.
